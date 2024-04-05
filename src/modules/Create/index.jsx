@@ -6,11 +6,12 @@ export default function Create(){
 
     const changeUploadFile = (e) => {
         const file = e.target.files[0]
+        console.log(e)
     }
 
     return(
         <div>
-            <input type="file" accept='image/*' />
+            <input type="file" accept='image/*' onChange={changeUploadFile}/>
             {urlImg && 
             (
             <div>

@@ -1,0 +1,13 @@
+.nav_link {
+    color: white;
+    text-decoration: none;
+    padding: 30px;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+#cart {
+    width: 50px;
+    position: relative;
+    top: 5px;
+}

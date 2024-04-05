@@ -1,0 +1,32 @@
+section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.row_reverse {
+    flex-direction: row-reverse;
+}
+
+.description {
+    border-bottom: 1px solid red;
+    border-width: 2px;
+    padding: 0 0 30px 0;
+    margin-bottom: 40px;
+}
+
+.description > div {
+    width: 70%;
+}
+
+.description p {
+    margin-top: 10px;
+}
+
+.description h2 {
+    font-weight: 600;
+}
+
+.img_home {
+    width: 500px;
+}

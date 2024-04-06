@@ -3,10 +3,7 @@
 .card_item {
     position: relative;
     margin: 0 40px 40px 0;
-}
-
-.card_item:hover{
-    cursor: pointer;
+    color: #333333;
 }
 
 .card_item > p {

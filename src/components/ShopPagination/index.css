@@ -10,3 +10,14 @@
     justify-content: center;
     margin: 15px 0;
 }
+
+.loader_shop {
+    display: flex;
+    margin-left: 40px;
+}
+
+@media (max-width: 1350px){
+    #shop_pagination {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

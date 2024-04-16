@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useData } from "../../../utils/context/useData";
 import { Button } from "../../components/Button";
+import Carousel from "../../components/Carousel";
 import './index.css'
 
 const Item = () => {
@@ -44,6 +45,7 @@ const Item = () => {
           </div>
         </div>
       )}
+      <Carousel title="productos relacionados"/>
     </div>
   );
 };

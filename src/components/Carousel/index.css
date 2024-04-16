@@ -1,0 +1,44 @@
+.slider-container {
+    display: flex;    
+    flex-direction: column;
+    align-items: center;
+    margin: 70px 0;
+}
+
+.slider-container h2 {
+    font-weight: 700;
+    font-size: 30px;
+    text-transform: uppercase;
+    margin-bottom: 80px;
+}
+
+.slider {
+    position: relative;
+    width: 1050px;
+}
+
+.slides {
+    display: flex;
+    justify-content: center;
+}
+
+.slider button {
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    background-color: white;
+    color: #595959;
+    box-shadow: 1px 1px 3px 1px rgb(214, 214, 214);
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+#left_btn {
+    left: 0;
+}
+
+#right_btn {
+    right: 0;
+}
+

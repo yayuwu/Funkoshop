@@ -1,13 +1,14 @@
-#register {
+#login {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 80px 0;
+    height: 32vh;
 }
 
-#register h2 {
-    padding: 15px 0;
+#login h1 {
+    padding-bottom: 15px;
 } 
 
 .labels {
@@ -20,10 +21,3 @@
     padding: 0 5px;
 }
 
-.labels div label{
-    margin: 12px 0;
-}
-
-.labels div input {
-    margin: 14.5px 0 5px 0;
-}

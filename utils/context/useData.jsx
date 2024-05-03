@@ -17,6 +17,7 @@ export const DataProvider = ({ children }) => {
       description: doc.data().description,
       price: doc.data().price,
       key: doc.data().key,
+      quantity: doc.data().quantity, 
     }));
     return data;
   };

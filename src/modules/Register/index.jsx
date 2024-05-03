@@ -24,11 +24,11 @@ export default function Register(){
                         <input type="password" />
                     </div>
                 </div>
-                <div>
+                <div style={{display:'flex', justifyContent:'space-between', marginTop:'10px'}}>
                     <Button color="red">Register</Button>
-                    <div>
-                       <input type="checkbox" name="" id="" />
-                       <p>Acepto <a href="">Términos y Condiciones</a></p>
+                    <div style={{display:'flex', alignItems:'center', padding:'10px'}}>
+                       <input type="checkbox" name="" id="" style={{marginRight:'5px'}}/>
+                       <p>Acepto <a href="" style={{textDecoration:'none', color:'blue'}}>Términos y Condiciones</a></p>
                     </div>
                 </div>
             </form>

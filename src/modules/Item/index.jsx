@@ -3,9 +3,10 @@ import { useParams } from "react-router-dom";
 import { useData } from "../../../utils/context/useData";
 import { Button } from "../../components/Button";
 import Carousel from "../../components/Carousel";
+import { useCart } from "../../../utils/context/useCart";
 import './index.css'
 
-const Item = () => {
+const Item = ({item}) => {
   const { id } = useParams(); // Obtiene el id del ítem de la URL
   const { getData } = useData();
   const [selectedItem, setSelectedItem] = useState(null);
@@ -19,6 +20,14 @@ const Item = () => {
     };
     fetchData();
   }, [getData, id]);
+
+  const { addToCart } = useCart(); // Obtiene la función addToCart del contexto
+  
+  const handleAddToCart = () => {
+    if (selectedItem) {
+      addToCart(selectedItem); // Agrega el item al carrito usando la función addToCart del contexto
+    }
+  };
 
   return (
     <div>
@@ -39,7 +48,7 @@ const Item = () => {
                       <button>+</button>
                       <button>-</button>
                    </div>
-                <Button color="red" id="cart_button">Agregar al carrito</Button>
+                <Button color="red" id="cart_button" onClick={handleAddToCart}>Agregar al carrito</Button>
                 </div>
             </div>
           </div>

@@ -10,11 +10,13 @@ import Shop from './modules/Shop'
 import Login from './modules/Login'
 import Register from './modules/Register'
 import Item from './modules/Item'
+import { CartProvider } from '../utils/context/useCart'
 
 
 function App() {
   return (
     <>
+    <CartProvider>
       <Nav/>
       <Routes>
         {/* Ruta principal */}
@@ -32,6 +34,8 @@ function App() {
         <Route path='/admin/create' element={<Create/>}/>
       </Routes>
       <Footer/>
+
+    </CartProvider>
     </>
   )
 }

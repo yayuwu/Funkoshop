@@ -17,6 +17,7 @@ export default function ShopPagination() {
     const fetchData = async () => {
       setLoading(true)
       const data = await getData(); // Llamar a getData desde el contexto
+      console.log(data)
       setItems(data);
       // Simular un tiempo de carga de 2 segundos antes de cambiar el estado de loading
       setTimeout(() => {

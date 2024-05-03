@@ -1,7 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { NavLink } from "react-router-dom"
 import { styled } from '../../themes/stitches.config'
 import { Image } from 'cloudinary-react'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Badge } from '@mui/material';
 import './index.css'
 
 const StyledNav = styled('nav', {
@@ -13,6 +15,16 @@ const StyledNav = styled('nav', {
 })
 
 const NavGlobal = () =>{
+  const [cartItems, setCartItems] = useState([])
+  useEffect(() => {
+    const storedCartItems = JSON.parse(localStorage.getItem('cartItems'));
+    if (storedCartItems) {
+      setCartItems(storedCartItems);
+      console.log(cartItems && cartItems.length > 0 ? cartItems[0].img : 'No hay producto disponible');
+    } else {
+      console.log('No hay elementos en el carrito almacenados en localStorage');
+    }
+  }, []);
   return(
     <StyledNav>
       <div>
@@ -20,11 +32,15 @@ const NavGlobal = () =>{
           <Image cloudName="dkfa8olux" publicId="https://res.cloudinary.com/dkfa8olux/image/upload/v1712093255/funkoshop_img/funkos_logos/dark_iku3ch.svg"/>
         </NavLink>
       </div>
-      <div>
+      <div style={{display: 'flex', alignItems:'center', alignContent:'center'}}>
          <NavLink to="/shop" className="nav_link">SHOP</NavLink>
          <NavLink to="/" className="nav_link">CONTACTO</NavLink>
          <NavLink to="/login" className="nav_link">LOGIN</NavLink>
-         <NavLink to="/cart" className="nav_link" id='cart'><Image cloudName="dkfa8olux" publicId="https://res.cloudinary.com/dkfa8olux/image/upload/v1712093520/funkoshop_img/funkos_icons/cart_icon_scnl13.svg"/></NavLink>
+         <NavLink to="/cart" className="nav_link" id='cart'>
+         <Badge badgeContent={cartItems.lenght} sx={{ '& .MuiBadge-badge': { backgroundColor: '#F24E1E' } }}>
+            <ShoppingCartIcon sx={{marginBottom:'6px'}}/>
+          </Badge>
+         </NavLink>
       </div>
     </StyledNav>
   )

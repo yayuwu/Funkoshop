@@ -2,6 +2,7 @@
 import React, { createContext, useContext } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase.config"
+
 const DataContext = createContext();
 
 export const useData = () => useContext(DataContext);
@@ -18,6 +19,7 @@ export const DataProvider = ({ children }) => {
       price: doc.data().price,
       key: doc.data().key,
       quantity: doc.data().quantity, 
+      stock: doc.data().stock,
     }));
     return data;
   };

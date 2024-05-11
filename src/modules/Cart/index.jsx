@@ -1,15 +1,22 @@
 import { useEffect, useState } from 'react';
 import './index.css'
 import { Box, Typography, Table, TableHead, TableRow, TableBody, TableCell, TableContainer, Paper, Button } from '@mui/material'
+import { useCart } from '../../../utils/context/useCart';
 
 export default function Cart(){
-  const [cartItems, setCartItems] = useState([])
+   const {
+    cartItems, 
+    getTotalQuantity, 
+    getTotalPrice, 
+    shippingCost,
+    addItemQuantity,
+    removeItemQuantity
+  } = useCart()
+  
   useEffect(() => {
-    const storedCartItems = JSON.parse(localStorage.getItem('cartItems'));
-    if (storedCartItems) {
-      setCartItems(storedCartItems);
+    if (cartItems) {
       console.log(cartItems && cartItems.length > 0 ? cartItems[0].img : 'No hay imagen disponible');
-      console.log()
+      console.log(cartItems)
     } else {
       console.log('No hay elementos en el carrito almacenados en localStorage');
     }
@@ -19,7 +26,7 @@ export default function Cart(){
             <Box>
                 <Typography variant='h2' sx={{fontSize:'32px', fontWeight:'700',  borderBottom: '5px solid #F24E1E', margin:'20px 0', paddingBottom:'10px', display: 'inline-block'}}>CARRITO DE COMPRAS</Typography>
             </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'center', borderRadius: '10px', overflow: 'hidden' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', borderRadius: '10px', overflow: 'hidden', marginBottom: '200px' }}>
                  <TableContainer component={Paper} sx={{ minWidth: 650, marginBottom:'10px' }}>
                    <Table aria-label="simple table">
                      <TableHead>
@@ -43,8 +50,12 @@ export default function Cart(){
                                  {cartItem && cartItem?.price && <Typography fontSize='12px' textTransform='none'>Precio unitario: ${cartItem.price}</Typography>}
                                </Box>
                              </TableCell>
-                             <TableCell sx={{ borderBottom: '0', textAlign:'center' }}>{}</TableCell>
-                             { cartItem && cartItem?.price && <TableCell sx={{ borderBottom: '0', textAlign:'center' }}>${cartItem.price}</TableCell>}
+                             <TableCell sx={{ borderBottom: '0', textAlign:'center' }}>
+                              <Button onClick={()=> removeItemQuantity(cartItem.key)}>-</Button>
+                              <Button>{cartItem.quantity}</Button>
+                              <Button onClick={()=> addItemQuantity(cartItem.key)}>+</Button>
+                             </TableCell>
+                             { cartItem && cartItem?.price && <TableCell sx={{ borderBottom: '0', textAlign:'center' }}>${cartItem.price*cartItem.quantity}</TableCell>}
                            </TableRow>
                          ))
                        ) : (
@@ -57,7 +68,8 @@ export default function Cart(){
                    </Table>
                  </TableContainer>
             </Box>
-            {cartItems && cartItems.length > 0 && 
+            {cartItems && cartItems.length > 0 &&
+            
             <Box alignSelf='end' sx={{marginBottom:'30px'}}>
                 <Box sx={{ textAlign: 'end'}}>
                   <Box sx={{display: 'inline-block'}}>
@@ -69,21 +81,21 @@ export default function Cart(){
                      <TableHead>
                        <TableRow sx={{ backgroundColor: '#FAFAFF'}}>
                          <TableCell sx={{ borderBottom: '0', fontWeight:'700' }}>CANTIDAD DE ELEMENTOS</TableCell>
-                         <TableCell sx={{ borderBottom: '0', textAlign:'end'}}>3</TableCell>
+                         <TableCell sx={{ borderBottom: '0', textAlign:'end'}}>{getTotalQuantity()}</TableCell>
                        </TableRow>
                      </TableHead>
                      <TableBody>
                          <TableRow sx={{ backgroundColor: '#FAFAFF'}}>
                            <TableCell sx={{ borderBottom: '0', textTransform: 'uppercase', fontWeight:'700' }}>SUBTOTAL</TableCell>
-                           <TableCell sx={{ borderBottom: '0' , textAlign:'end'}}>$5399</TableCell>
+                           <TableCell sx={{ borderBottom: '0' , textAlign:'end'}}>${getTotalPrice()}</TableCell>
                          </TableRow>
                          <TableRow sx={{ backgroundColor: '#FAFAFF'}}>
                            <TableCell sx={{ textTransform: 'uppercase', fontWeight:'700', borderBottom: '2px solid #F24E1E' }}>ENVIO</TableCell>
-                           <TableCell sx={{  textAlign:'end', borderBottom: '2px solid #F24E1E'}}>$0</TableCell>
+                           <TableCell sx={{  textAlign:'end', borderBottom: '2px solid #F24E1E'}}>${shippingCost}</TableCell>
                          </TableRow>
                          <TableRow sx={{ backgroundColor: '#FAFAFF'}}>
                            <TableCell sx={{ borderBottom: '0', textTransform: 'uppercase', fontWeight:'700' }}>TOTAL</TableCell>
-                           <TableCell sx={{ borderBottom: '0' , textAlign:'end'}}>$5399</TableCell>
+                           <TableCell sx={{ borderBottom: '0' , textAlign:'end'}}>${getTotalPrice()+shippingCost}</TableCell>
                          </TableRow>
                      </TableBody>
                    </Table>

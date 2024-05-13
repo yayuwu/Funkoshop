@@ -10,22 +10,22 @@ export const CartProvider = ({ children }) => {
   );
   const [shippingCost, setShippingCost] = useState(300); 
 
-  const addToCart = (item) => {
-    // Verificar si el producto ya está en el carrito
+  const addToCart = (item, quantityToAdd = 1) => {
     const existingItemIndex = cartItems.findIndex(cartItem => cartItem.key === item.key);
-
+  
     if (existingItemIndex !== -1) {
-      // Si el producto ya está en el carrito, aumentar la cantidad en 1
+      // Si el producto ya está en el carrito, aumentar la cantidad
       const updatedCartItems = [...cartItems];
-      updatedCartItems[existingItemIndex].quantity += 1;
+      updatedCartItems[existingItemIndex].quantity += quantityToAdd;
       setCartItems(updatedCartItems);
       localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
     } else {
-      // Si el producto no está en el carrito, agregarlo con cantidad 1
-      setCartItems([...cartItems, { ...item, quantity: 1 }]);
-      localStorage.setItem('cartItems', JSON.stringify([...cartItems, { ...item, quantity: 1 }]));
+      // Si el producto no está en el carrito, agregarlo con la cantidad especificada
+      setCartItems([...cartItems, { ...item, quantity: quantityToAdd }]);
+      localStorage.setItem('cartItems', JSON.stringify([...cartItems, { ...item, quantity: quantityToAdd }]));
     }
   };
+  
 
   const removeFromCart = (index) => {
     const updatedCartItems = [...cartItems];

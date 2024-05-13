@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './index.css'
 import { Box, Typography, Table, TableHead, TableRow, TableBody, TableCell, TableContainer, Paper, Button } from '@mui/material'
 import { useCart } from '../../../utils/context/useCart';
+import { Link } from 'react-router-dom';
 
 export default function Cart(){
    const {
@@ -10,7 +11,8 @@ export default function Cart(){
     getTotalPrice, 
     shippingCost,
     addItemQuantity,
-    removeItemQuantity
+    removeItemQuantity,
+    clearCart
   } = useCart()
   
   useEffect(() => {
@@ -100,8 +102,10 @@ export default function Cart(){
                      </TableBody>
                    </Table>
                  </TableContainer>
+                 <Link to="https://www.mercadopago.com.ar/" style={{color: 'white'}}>
                  <Button sx={{backgroundColor :'#FF3333', color:'white', padding: '10px 15px', width: '100%', borderRadius: '0', fontWeight:'600', fontSize:'20px', '&:hover': {
-                   backgroundColor: '#FF6666', },}}>IR A PAGAR</Button>
+                   backgroundColor: '#FF6666', }}} onClick={()=>clearCart()}>IR A PAGAR</Button>
+                 </Link>
             </Box>
             }
         </Box>

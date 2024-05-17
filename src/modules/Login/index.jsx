@@ -33,7 +33,7 @@ export default function Login(){
                         <input type="password" />
                     </div>
                 </div>
-                <div style={{display:'flex', justifyContent:'space-between', marginTop:'10px'}}>
+                <div style={{display:'flex', marginTop:'20px', flexDirection: 'column', alignItems: 'center'}}>
                     <Button color="red" type="submit">Ingresar</Button>
                     <div style={{display:'flex', alignItems:'center', padding:'10px'}}>
                        <input type="checkbox" name="" id="" style={{marginRight:'5px'}}/>

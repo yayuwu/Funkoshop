@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Searchbar from "../Searchbar";
 import { useData } from "../../../utils/context/useData"; // Importar el contexto
 import CardItem from "../CardItem";
 import Pagination from "@mui/material/Pagination";
@@ -43,6 +44,9 @@ export default function ShopPagination() {
 
   return (
     <div>
+       <div style={{display: 'flex', justifyContent: 'center', marginBottom: '100px'}}>
+         <Searchbar/>
+       </div>
       {loading ? (
         <div className="loader_shop">
           <Loader/>

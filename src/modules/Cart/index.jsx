@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './index.css'
 import { Box, Typography, Table, TableHead, TableRow, TableBody, TableCell, TableContainer, Paper, Button } from '@mui/material'
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useCart } from '../../../utils/context/useCart';
 import { Link } from 'react-router-dom';
 
@@ -12,6 +13,7 @@ export default function Cart(){
     shippingCost,
     addItemQuantity,
     removeItemQuantity,
+    removeFromCart,
     clearCart
   } = useCart()
   
@@ -29,13 +31,14 @@ export default function Cart(){
                 <Typography variant='h2' sx={{fontSize:'32px', fontWeight:'700',  borderBottom: '5px solid #F24E1E', margin:'20px 0', paddingBottom:'10px', display: 'inline-block'}}>CARRITO DE COMPRAS</Typography>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', borderRadius: '10px', overflow: 'hidden', marginBottom: '200px' }}>
-                 <TableContainer component={Paper} sx={{ minWidth: 650, marginBottom:'10px' }}>
+                 <TableContainer component={Paper} sx={{ minWidth: 650, marginBottom:'10px', boxShadow: 'none' }}>
                    <Table aria-label="simple table">
                      <TableHead>
                        <TableRow sx={{ backgroundColor: '#FAFAFF'}}>
                          <TableCell sx={{ borderBottom: '0', fontWeight:'700', paddingLeft:'50px'}}>DETALLES DEL PRODUCTO</TableCell>
                          <TableCell sx={{ borderBottom: '0', fontWeight:'700', textAlign:'center' }}>CANTIDAD</TableCell>
                          <TableCell sx={{ borderBottom: '0', fontWeight:'700', textAlign:'center' }}>TOTAL</TableCell>
+                         <TableCell sx={{ borderBottom: '0', fontWeight:'700', textAlign:'center' }}></TableCell>
                        </TableRow>
                      </TableHead>
                      <TableBody>
@@ -53,16 +56,31 @@ export default function Cart(){
                                </Box>
                              </TableCell>
                              <TableCell sx={{ borderBottom: '0', textAlign:'center' }}>
-                              <Button onClick={()=> removeItemQuantity(cartItem.key)}>-</Button>
-                              <Button>{cartItem.quantity}</Button>
-                              <Button onClick={()=> addItemQuantity(cartItem.key)}>+</Button>
+                              <Button onClick={()=> removeItemQuantity(cartItem.key)} sx={{color: 'black', '&:hover' : {
+                                backgroundColor: 'transparent',
+                              }}}>-</Button>
+                              <Button sx={{color: 'black', '&:hover' : {
+                                backgroundColor: 'transparent',
+                              }}}>{cartItem.quantity}</Button>
+                              <Button onClick={()=> addItemQuantity(cartItem.key)} sx={{color: 'black', '&:hover' : {
+                                backgroundColor: 'transparent',
+                              }}}>+</Button>
                              </TableCell>
                              { cartItem && cartItem?.price && <TableCell sx={{ borderBottom: '0', textAlign:'center' }}>${cartItem.price*cartItem.quantity}</TableCell>}
+                             <TableCell sx={{ borderBottom: '0', textAlign:'center' }}>
+                                  <HighlightOffIcon sx={{
+                                    color: '#F24E1E',
+                                    '&:hover' : {
+                                      cursor : 'pointer',
+                                    }
+                                  }}
+                                  onClick={removeFromCart}/>
+                             </TableCell>
                            </TableRow>
                          ))
                        ) : (
                          <TableRow>
-                          <TableCell sx={{textAlign:'center'}} colSpan={3}>No agregaste nada al carrito aún.</TableCell>
+                          <TableCell sx={{textAlign:'center'}} colSpan={4}>No agregaste nada al carrito aún.</TableCell>
                          </TableRow>
                        )}
 
@@ -78,7 +96,7 @@ export default function Cart(){
                      <Typography variant='h2' sx={{fontSize:'32px', fontWeight:'700',  borderBottom: '5px solid #F24E1E', margin:'20px 0', paddingBottom:'10px'}}>RESUMEN</ Typography>
                   </Box>
                 </Box>
-                <TableContainer component={Paper} sx={{ minWidth: 400, marginBottom:'30px'}}>
+                <TableContainer component={Paper} sx={{ minWidth: 400, marginBottom:'30px', boxShadow: 'none'}}>
                    <Table aria-label="simple table">
                      <TableHead>
                        <TableRow sx={{ backgroundColor: '#FAFAFF'}}>

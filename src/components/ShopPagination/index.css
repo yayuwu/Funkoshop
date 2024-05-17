@@ -16,8 +16,28 @@
     margin-left: 40px;
 }
 
-@media (max-width: 1350px){
+@media (min-width: 320px){
+    #shop_pagination {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+@media (min-width: 800px){
     #shop_pagination {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 1200px){
+    #shop_pagination {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (min-width: 1490px){
+    #shop_pagination {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media (min-width: 1700px){
+    #shop_pagination {
+        grid-template-columns: repeat(5, 1fr);
     }
 }

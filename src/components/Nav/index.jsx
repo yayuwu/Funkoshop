@@ -3,7 +3,8 @@ import { NavLink } from "react-router-dom"
 import { styled } from '../../themes/stitches.config'
 import { Image } from 'cloudinary-react'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Badge } from '@mui/material';
+import { Badge, Hidden, Drawer } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import { useCart } from '../../../utils/context/useCart';
 import './index.css'
 
@@ -16,6 +17,11 @@ const StyledNav = styled('nav', {
 })
 
 const NavGlobal = () =>{
+  const [open, setOpen] = useState(false);
+     const toggleDrawer = (newOpen) => () => {
+        setOpen(newOpen);
+      };
+
   const {
     cartItems, 
     getTotalQuantity
@@ -25,9 +31,10 @@ const NavGlobal = () =>{
     <StyledNav>
       <div>
         <NavLink to="/">
-          <Image cloudName="dkfa8olux" publicId="https://res.cloudinary.com/dkfa8olux/image/upload/v1712093255/funkoshop_img/funkos_logos/dark_iku3ch.svg"/>
+          <Image cloudName="dkfa8olux" publicId="https://res.cloudinary.com/dkfa8olux/image/upload/v1712093255/funkoshop_img/funkos_logos/dark_iku3ch.svg" className='img_logo'/>
         </NavLink>
       </div>
+      <Hidden mdDown>
       <div style={{display: 'flex', alignItems:'center', alignContent:'center'}}>
          <NavLink to="/shop" className="nav_link">SHOP</NavLink>
          <NavLink to="/" className="nav_link">CONTACTO</NavLink>
@@ -38,21 +45,41 @@ const NavGlobal = () =>{
           </Badge>
          </NavLink>
       </div>
+        </Hidden>      
+        <Hidden mdUp> 
+          <MenuIcon sx={{color: 'white'}} onClick={toggleDrawer(true)}/>
+          <Drawer open={open} onClose={toggleDrawer(false)}>
+              aaaaaaaaaaaaaaaaaaa
+            </Drawer>
+      </Hidden>
     </StyledNav>
   )
 }
 
 const NavAdmin = () =>{
+  const [open, setOpen] = useState(false);
+     const toggleDrawer = (newOpen) => () => {
+        setOpen(newOpen);
+      };
   return(
     <StyledNav>
-      <div>
-         <Image cloudName="dkfa8olux" publicId="https://res.cloudinary.com/dkfa8olux/image/upload/v1712093255/funkoshop_img/funkos_logos/dark_iku3ch.svg"/>
-      </div>
+        <NavLink to="/">
+          <Image cloudName="dkfa8olux" publicId="https://res.cloudinary.com/dkfa8olux/image/upload/v1712093255/funkoshop_img/funkos_logos/dark_iku3ch.svg" className='img_logo'/>
+        </NavLink>
+      <Hidden mdDown>
       <div>
          <NavLink to="/" className="nav_link">VER TIENDA</NavLink>
          <NavLink to="/admin" className="nav_link">ADMIN</NavLink>
          <NavLink to="/" className="nav_link">SALIR</NavLink>
       </div>
+
+      </Hidden>
+      <Hidden mdUp> 
+          <MenuIcon sx={{color: 'white'}} onClick={toggleDrawer(true)}/>
+          <Drawer open={open} onClose={toggleDrawer(false)}>
+              aaaaaaaaaaaaaaaaaaa
+            </Drawer>
+      </Hidden>
     </StyledNav>
   )
 }

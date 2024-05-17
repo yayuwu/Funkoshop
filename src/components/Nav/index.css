@@ -11,3 +11,9 @@
     position: relative;
     top: 5px;
 }
+
+@media (max-width: 800px) {
+    .img_logo {
+        width: 200px;
+    }
+}

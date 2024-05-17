@@ -11,12 +11,15 @@ const Item = ({item}) => {
   const { getData } = useData();
   const [quantity, setQuantity] = useState(0);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItemStock, setSelectedItemStock] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getData();
       const extractedId = parseInt(id.split(":")[1], 10);
       const item = data.find((item) => item.key === extractedId); // Busca el ítem por su id
+      console.log("stock: ", item.stock)
+      setSelectedItemStock(item.stock)
       setSelectedItem(item);
     };
     fetchData();
@@ -36,13 +39,13 @@ const Item = ({item}) => {
     let value = parseInt(e.target.value);
     // Limita la cantidad a un máximo de 10
     if (!isNaN(value)) {
-      value = Math.min(value, 10);
+      value = Math.min(value, selectedItemStock);
       setQuantity(value);
     }
   };
 
   const handleIncrement = () => {
-    if (quantity < 10) {
+    if (quantity < selectedItemStock) {
       setQuantity(quantity + 1);
     }
   };
